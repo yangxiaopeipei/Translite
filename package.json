@@ -1,0 +1,319 @@
+{
+  "$schema": "https://www.raycast.com/schemas/extension.json",
+  "name": "translite",
+  "title": "Translite",
+  "description": "主页面输入即译、划词上下对照，支持 DeepL 和 Google。",
+  "icon": "translite-icon.png",
+  "author": "yangxiaopeipei",
+  "license": "MIT",
+  "categories": [
+    "Productivity",
+    "Other"
+  ],
+  "keywords": [
+    "translate",
+    "translation",
+    "deepl",
+    "pronunciation",
+    "翻译",
+    "发音"
+  ],
+  "commands": [
+    {
+      "name": "translate",
+      "title": "翻译",
+      "subtitle": "DeepL / Google",
+      "description": "输入即译，支持多行原文、语言交换、复制和朗读。",
+      "icon": "translite-icon.png",
+      "mode": "view"
+    },
+    {
+      "name": "translate-selection",
+      "title": "翻译选中文本",
+      "subtitle": "划词",
+      "description": "翻译当前前台应用中选中的文本。建议给它绑一个全局快捷键，选中即译。",
+      "icon": "translite-icon.png",
+      "mode": "no-view"
+    }
+  ],
+  "preferences": [
+    {
+      "name": "apiKey",
+      "type": "password",
+      "required": false,
+      "title": "DeepL API Key",
+      "description": "仅使用 DeepL 时填写；Google 无需此 Key。免费版 Key 以 :fx 结尾。",
+      "placeholder": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx:fx"
+    },
+    {
+      "name": "defaultTarget",
+      "type": "dropdown",
+      "required": false,
+      "default": "ZH-HANS",
+      "title": "默认目标语言",
+      "description": "命令启动时的默认目标语言，选择结果会被记住。",
+      "data": [
+        {
+          "title": "简体中文",
+          "value": "ZH-HANS"
+        },
+        {
+          "title": "英语（美国）",
+          "value": "EN-US"
+        },
+        {
+          "title": "英语（英国）",
+          "value": "EN-GB"
+        },
+        {
+          "title": "日语",
+          "value": "JA"
+        },
+        {
+          "title": "韩语",
+          "value": "KO"
+        },
+        {
+          "title": "德语",
+          "value": "DE"
+        },
+        {
+          "title": "法语",
+          "value": "FR"
+        },
+        {
+          "title": "西班牙语",
+          "value": "ES"
+        },
+        {
+          "title": "俄语",
+          "value": "RU"
+        },
+        {
+          "title": "意大利语",
+          "value": "IT"
+        },
+        {
+          "title": "葡萄牙语（巴西）",
+          "value": "PT-BR"
+        },
+        {
+          "title": "葡萄牙语（欧洲）",
+          "value": "PT-PT"
+        },
+        {
+          "title": "荷兰语",
+          "value": "NL"
+        },
+        {
+          "title": "波兰语",
+          "value": "PL"
+        },
+        {
+          "title": "土耳其语",
+          "value": "TR"
+        },
+        {
+          "title": "印尼语",
+          "value": "ID"
+        },
+        {
+          "title": "乌克兰语",
+          "value": "UK"
+        },
+        {
+          "title": "阿拉伯语",
+          "value": "AR"
+        }
+      ]
+    },
+    {
+      "name": "primaryEngine",
+      "type": "dropdown",
+      "required": false,
+      "default": "deepl",
+      "title": "主引擎",
+      "description": "页面可直接切换 DeepL / Google；当前服务失败时自动尝试另一个。Google 使用免 Key 的非官方接口。",
+      "data": [
+        {
+          "title": "DeepL（质量优先）",
+          "value": "deepl"
+        },
+        {
+          "title": "Google（速度优先，免 Key）",
+          "value": "google"
+        }
+      ]
+    },
+    {
+      "name": "defaultSource",
+      "type": "dropdown",
+      "required": false,
+      "default": "",
+      "title": "默认源语言",
+      "description": "留空为自动检测。",
+      "data": [
+        {
+          "title": "自动检测",
+          "value": ""
+        },
+        {
+          "title": "中文",
+          "value": "ZH"
+        },
+        {
+          "title": "英语",
+          "value": "EN"
+        },
+        {
+          "title": "日语",
+          "value": "JA"
+        },
+        {
+          "title": "韩语",
+          "value": "KO"
+        },
+        {
+          "title": "德语",
+          "value": "DE"
+        },
+        {
+          "title": "法语",
+          "value": "FR"
+        },
+        {
+          "title": "西班牙语",
+          "value": "ES"
+        },
+        {
+          "title": "俄语",
+          "value": "RU"
+        }
+      ]
+    },
+    {
+      "name": "alternateTarget",
+      "type": "dropdown",
+      "required": false,
+      "default": "EN-US",
+      "title": "原文已是目标语言时译成",
+      "description": "自动识别出原文就是目标语言时（例如选中中文、目标也是中文），自动改译成这里选的语言，避免中译中。",
+      "data": [
+        {
+          "title": "英语（美国）",
+          "value": "EN-US"
+        },
+        {
+          "title": "英语（英国）",
+          "value": "EN-GB"
+        },
+        {
+          "title": "简体中文",
+          "value": "ZH-HANS"
+        },
+        {
+          "title": "日语",
+          "value": "JA"
+        },
+        {
+          "title": "韩语",
+          "value": "KO"
+        },
+        {
+          "title": "德语",
+          "value": "DE"
+        },
+        {
+          "title": "法语",
+          "value": "FR"
+        },
+        {
+          "title": "西班牙语",
+          "value": "ES"
+        },
+        {
+          "title": "俄语",
+          "value": "RU"
+        },
+        {
+          "title": "意大利语",
+          "value": "IT"
+        },
+        {
+          "title": "葡萄牙语（巴西）",
+          "value": "PT-BR"
+        },
+        {
+          "title": "葡萄牙语（欧洲）",
+          "value": "PT-PT"
+        },
+        {
+          "title": "荷兰语",
+          "value": "NL"
+        },
+        {
+          "title": "波兰语",
+          "value": "PL"
+        },
+        {
+          "title": "土耳其语",
+          "value": "TR"
+        },
+        {
+          "title": "印尼语",
+          "value": "ID"
+        },
+        {
+          "title": "乌克兰语",
+          "value": "UK"
+        },
+        {
+          "title": "阿拉伯语",
+          "value": "AR"
+        }
+      ]
+    },
+    {
+      "name": "enableSpeech",
+      "type": "checkbox",
+      "required": false,
+      "default": true,
+      "title": "朗读",
+      "label": "启用系统语音朗读",
+      "description": "macOS 用内置 say，Windows 用 PowerShell 调用 System.Speech 合成语音。"
+    },
+    {
+      "name": "selectionClipboardFallback",
+      "type": "checkbox",
+      "required": false,
+      "default": true,
+      "title": "划词兜底",
+      "label": "读不到选中文本时改用剪贴板",
+      "description": "部分应用不允许模拟复制，划词命令取不到内容时回退读取剪贴板，并在顶部提示来源。"
+    }
+  ],
+  "dependencies": {
+    "@raycast/api": "^2.7.3",
+    "@raycast/utils": "^2.3.2"
+  },
+  "devDependencies": {
+    "@raycast/eslint-config": "^2.2.0",
+    "@types/node": "22.19.17",
+    "@types/react": "19.0.10",
+    "eslint": "^10.12.0",
+    "prettier": "^3.9.10",
+    "typescript": "~5.9.3"
+  },
+  "scripts": {
+    "build": "ray build",
+    "dev": "ray develop",
+    "fix-lint": "ray lint --fix",
+    "lint": "ray lint",
+    "typecheck": "tsc --noEmit"
+  },
+  "platforms": [
+    "macOS",
+    "Windows"
+  ],
+  "private": true
+}
